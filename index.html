@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Film</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#111;
+color:white;
+text-align:center;
+}
+
+.container{
+padding:30px 15px;
+}
+
+h1{
+margin-bottom:5px;
+}
+
+.subtitle{
+color:#ccc;
+margin-bottom:25px;
+}
+
+.film-strip{
+display:flex;
+overflow-x:auto;
+gap:20px;
+padding:20px;
+}
+
+.frame{
+background:#000;
+padding:10px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.7);
+position:relative;
+}
+
+.frame img{
+height:220px;
+border-radius:5px;
+}
+
+.frame:before,
+.frame:after{
+content:"";
+position:absolute;
+top:0;
+bottom:0;
+width:10px;
+background:repeating-linear-gradient(
+to bottom,
+#333 0px,
+#333 8px,
+transparent 8px,
+transparent 16px
+);
+}
+
+.frame:before{
+left:-10px;
+}
+
+.frame:after{
+right:-10px;
+}
+
+.message{
+margin-top:25px;
+background:white;
+color:#333;
+padding:15px;
+border-radius:10px;
+max-width:350px;
+margin-left:auto;
+margin-right:auto;
+}
+
+footer{
+margin-top:40px;
+color:#888;
+font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Our Memory 🎞️</h1>
+<p class="subtitle">Slide film untuk melihat kenangan</p>
+
+<div class="film-strip">
+
+<div class="frame">
+<img src="foto1.jpg">
+</div>
+
+<div class="frame">
+<img src="foto2.jpg">
+</div>
+
+<div class="frame">
+<img src="foto3.jpg">
+</div>
+
+<div class="frame">
+<img src="foto4.jpg">
+</div>
+
+</div>
+
+<div class="message">
+Terima kasih sudah menjadi bagian dari kenangan ini ❤️
+</div>
+
+</div>
+
+<audio autoplay loop>
+<source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<footer>
+Scan • Memory • Repeat
+</footer>
+
+</body>
+</html>
