@@ -3,41 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Memory Gallery 2 Kolom Responsive</title>
+<title>Memory Gallery Undangan</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
 
 <style>
-
-/* ===== BODY ===== */
 body{
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:'Playfair Display', serif;
   color:white;
   text-align:center;
   background:black;
   overflow-x:hidden;
   overflow-y:auto;
 }
-
-/* ===== BACKGROUND BLUR + OVERLAY ===== */
 .bg{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  top:0; left:0;
+  width:100%; height:100%;
   background:url("background.jpg") center/cover no-repeat;
-  filter:blur(8px) brightness(0.4);
+  filter:blur(2px) brightness(0.8);
   z-index:-1;
 }
 .bg::after{
   content:"";
-  position:absolute;
-  top:0; left:0;
+  position:absolute; top:0; left:0;
   width:100%; height:100%;
-  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+  background:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6));
 }
 
-/* ===== HALAMAN ===== */
+/* Halaman awal ala undangan */
 .start, .gallery, .message{
   min-height:100vh;
   display:flex;
@@ -47,20 +43,34 @@ body{
   opacity:1;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
-
 .hidden{
   opacity:0;
   transform:translateY(30px);
   pointer-events:none;
 }
-
 .start h1{
   font-size:36px;
-  margin-bottom:25px;
-  font-family: 'Pacifico', cursive;
+  margin-bottom:10px;
+  font-family:'Pacifico', cursive;
   text-shadow: 0 2px 10px rgba(0,0,0,0.7);
 }
-
+.start .ornament{
+  width:300px;
+  margin:30px auto;
+}
+.start .names{
+  font-family:'Great Vibes', cursive;
+  font-size:60px;
+  margin:15px 0;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+.start .divider{
+  width:120px;
+  height:2px;
+  background:#ff4d6d;
+  margin:10px auto 25px auto;
+  border-radius:2px;
+}
 button{
   background:#ff4d6d;
   color:white;
@@ -73,24 +83,29 @@ button{
 }
 button:hover{
   transform:scale(1.05);
+  box-shadow:0 0 15px #ff4d6d;
   background:#ff6680;
 }
 
-/* ===== GALLERY 2 KOLM GRID ===== */
+/* Gallery 2 kolom grid */
 .gallery{
   padding:40px 20px;
   display:none;
+  opacity:0;
+  transform:translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
-
+.gallery.show{
+  opacity:1;
+  transform:translateY(0);
+}
 .film-strip{
   display:grid;
-  grid-template-columns:repeat(2, 1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:30px;
   justify-items:center;
   padding-bottom:50px;
 }
-
-/* ===== FOTO ===== */
 .frame{
   position:relative;
   width:280px;
@@ -98,21 +113,23 @@ button:hover{
   transform:translateY(40px) scale(0.95);
   transition:all 0.8s;
 }
-
 .frame.show{
   opacity:1;
   transform:translateY(0) scale(1) rotate(var(--rotate));
 }
-
 .frame img{
   width:100%;
   border-radius:15px;
   cursor:pointer;
   box-shadow:0 10px 25px rgba(0,0,0,0.4);
-  transition:transform 0.5s;
+  transition:transform 0.5s, filter 0.5s;
+  filter: brightness(0.95) saturate(1.1);
 }
-
-/* ===== FRAME DECOR ===== */
+.frame img:hover{
+  transform: scale(1.05) rotate(1deg);
+  filter: brightness(1) saturate(1.2);
+  box-shadow:0 15px 30px rgba(0,0,0,0.6);
+}
 .frame::after{
   content:"";
   position:absolute;
@@ -123,26 +140,20 @@ button:hover{
   background:url("frame.png") center/contain no-repeat;
   opacity:0.6;
 }
-
-/* ===== LIGHTBOX FULLSCREEN ===== */
 .lightbox{
   display:none;
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  top:0; left:0;
+  width:100%; height:100%;
   background:rgba(0,0,0,0.95);
   justify-content:center;
   align-items:center;
 }
-
 .lightbox img{
   max-width:95%;
   max-height:95%;
   border-radius:10px;
 }
-
 .close{
   position:absolute;
   top:20px;
@@ -150,26 +161,6 @@ button:hover{
   font-size:32px;
   cursor:pointer;
 }
-
-/* ===== TOMBOL KEMBALI ===== */
-.back{
-  position:fixed;
-  top:15px;
-  left:15px;
-  font-size:24px;
-  background:rgba(0,0,0,0.5);
-  padding:6px 12px;
-  border-radius:8px;
-  cursor:pointer;
-  display:none;
-  transition:0.3s;
-}
-.back:hover{
-  background:rgba(255,255,255,0.2);
-  color:#ff4d6d;
-}
-
-/* ===== PESAN ===== */
 .message{
   display:none;
   min-height:100vh;
@@ -179,9 +170,33 @@ button:hover{
   align-items:center;
   font-size:20px;
   line-height:1.7;
+  opacity:0;
+  transform:translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  position:relative;
 }
-
-/* ===== RESPONSIVE MOBILE ===== */
+.message.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.back-message{
+  position:fixed; /* supaya selalu terlihat */
+  top:70px;
+  left:15px;
+  font-size:24px;
+  background:rgba(0,0,0,0.6);
+  padding:6px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  display:none;
+  pointer-events:auto;
+  transition:0.3s;
+  z-index:9999; /* supaya tidak tertutup elemen lain */
+}
+.back-message:hover{
+  background:rgba(255,255,255,0.2);
+  color:#ff4d6d;
+}
 @media screen and (max-width:600px){
   .film-strip{
     grid-template-columns:1fr;
@@ -191,21 +206,21 @@ button:hover{
     width:90%;
   }
 }
-
+html{scroll-behavior:smooth;}
 </style>
 </head>
-
 <body>
 
 <div class="bg"></div>
 
-<!-- TOMBOL KEMBALI -->
-<div class="back" onclick="backToGallery()">←</div>
-
 <!-- HALAMAN AWAL -->
 <div class="start" id="start">
+  <img class="ornament" src="ornament_top.png" alt="ornament">
   <h1>Memory Gallery ❤️</h1>
+  <div class="names">For Special Person</div>
+  <div class="divider"></div>
   <button onclick="openMemory()">Buka Kenangan</button>
+  <img class="ornament" src="ornament_bottom.png" alt="ornament">
 </div>
 
 <!-- GALERI -->
@@ -225,6 +240,7 @@ button:hover{
 
 <!-- HALAMAN PESAN -->
 <div class="message" id="message">
+  <div class="back-message" id="back-message">← Kembali</div>
   <h2>Pesan Kenangan ❤️</h2>
   <p>
     Terima kasih sudah membuka kenangan ini.<br><br>
@@ -244,99 +260,88 @@ button:hover{
   <source src="lagu.mp3" type="audio/mpeg">
 </audio>
 
-<script>
+<!-- SCRIPT CONFETTI -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-// ===== OPEN MEMORY =====
+<script>
 function openMemory(){
   document.getElementById("start").classList.add("hidden");
-
-  setTimeout(()=> {
+  confetti({particleCount:150,spread:70,origin:{y:0.6},colors:['#ff4d6d','#ffcc66','#66ccff','#99ff99']});
+  setTimeout(()=>{
     document.getElementById("start").style.display="none";
-    let gallery = document.getElementById("gallery");
-    gallery.style.display = "flex";
-    gallery.classList.remove("hidden");
-
+    let gallery=document.getElementById("gallery");
+    gallery.style.display="flex";
+    setTimeout(()=>{ gallery.classList.add("show"); },50);
     startScroll();
-  }, 600);
-
-  let music = document.getElementById("music");
-  fadeInAudio(music, 2000); // mulai musik
+  },600);
+  let music=document.getElementById("music");
+  fadeInAudio(music,2000);
 }
 
-// ===== FULLSCREEN FOTO =====
 function openImage(src){
   document.getElementById("lightbox").style.display="flex";
-  document.getElementById("lightbox-img").src = src;
+  document.getElementById("lightbox-img").src=src;
 }
-
-function closeImage(){
-  document.getElementById("lightbox").style.display="none";
-}
-
-// tutup lightbox klik area hitam
-document.getElementById("lightbox").addEventListener("click", function(e){
-  if(e.target !== document.getElementById("lightbox-img")){
-    closeImage();
-  }
+function closeImage(){ document.getElementById("lightbox").style.display="none"; }
+document.getElementById("lightbox").addEventListener("click",function(e){
+  if(e.target !== document.getElementById("lightbox-img")) closeImage();
 });
 
-// ===== BUKA PESAN =====
 function openMessage(){
-  document.getElementById("gallery").style.display="none";
-  document.getElementById("message").style.display="flex";
-  document.querySelector(".back").style.display="block";
-  // musik tetap jalan
+  const gallery=document.getElementById("gallery");
+  gallery.classList.remove("show");
+  gallery.style.display="none";
+  const message=document.getElementById("message");
+  message.style.display="flex";
+  const backBtn=document.getElementById("back-message");
+  backBtn.style.display="block";
+  setTimeout(()=>{ message.classList.add("show"); },50);
 }
 
-// ===== BACK KE GALLERY =====
-function backToGallery(){
-  document.getElementById("message").style.display="none";
-  document.getElementById("gallery").style.display="flex";
-  document.querySelector(".back").style.display="none";
-}
+const backBtn=document.getElementById("back-message");
+backBtn.addEventListener("click",()=>{
+  const message=document.getElementById("message");
+  const gallery=document.getElementById("gallery");
+  message.classList.remove("show");
+  backBtn.style.display="none";
+  setTimeout(()=>{
+    message.style.display="none";
+    gallery.style.display="flex";
+    void gallery.offsetWidth;
+    gallery.classList.add("show");
+  },400);
+});
 
-// ===== SCROLL ANIMASI FRAME =====
 function startScroll(){
-  let frames = document.querySelectorAll(".frame");
-
-  frames.forEach(frame => {
-    let rotateDeg = (Math.random() * 6 - 3) + "deg"; // -3 ~ 3 deg
-    frame.style.setProperty("--rotate", rotateDeg);
+  let frames=document.querySelectorAll(".frame");
+  frames.forEach(frame=>{
+    frame.style.setProperty("--rotate",(Math.random()*6-3)+"deg");
   });
-
   function reveal(){
-    let windowHeight = window.innerHeight;
-    frames.forEach((frame, index)=>{
-      let top = frame.getBoundingClientRect().top;
-      if(top < windowHeight - 100){
-        if(!frame.classList.contains("show")){
-          setTimeout(()=>{
-            frame.classList.add("show");
-          }, index * 150);
-        }
+    let windowHeight=window.innerHeight;
+    frames.forEach((frame,index)=>{
+      let top=frame.getBoundingClientRect().top;
+      if(top<windowHeight-100 && !frame.classList.contains("show")){
+        setTimeout(()=>{frame.classList.add("show");},index*150);
       }
     });
   }
-
-  window.addEventListener("scroll", reveal);
+  window.addEventListener("scroll",reveal);
   reveal();
 }
 
-// ===== AUDIO FADE IN =====
-function fadeInAudio(audio, duration=2000){
-  audio.volume = 0;
+function fadeInAudio(audio,duration=2000){
+  audio.volume=0;
   audio.play();
-  let step = 0.05;
-  let interval = duration * step / 1000;
-  let vol = 0;
-  let fade = setInterval(()=>{
-    vol += step;
+  let step=0.05;
+  let interval=duration*step/1000;
+  let vol=0;
+  let fade=setInterval(()=>{
+    vol+=step;
     if(vol>=1){vol=1; clearInterval(fade);}
-    audio.volume = vol;
-  }, interval);
+    audio.volume=vol;
+  },interval);
 }
-
 </script>
-
 </body>
 </html>
